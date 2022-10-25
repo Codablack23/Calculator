@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  background-color: #b97d0c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; }
+
+main {
+  width: fit-content;
+  background-color: #232d3e;
+  padding: 1.5em;
+  border-radius: 10px; }
+  @media screen and (max-width: 575px) {
+    main {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; } }
+
+.screen {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #ecf2f8;
+  margin-bottom: 1em;
+  height: 3em;
+  padding: 0.3em; }
+
+.keypad {
+  display: grid;
+  gap: 0.8em;
+  grid-template-columns: repeat(4, 1fr); }
+  .keypad_1 {
+    grid-column: 1 / span 2; }
+  .keypad_equals {
+    grid-column: 3 / span 2; }
+
+input[type=button] {
+  background-color: #0c152c;
+  outline: none;
+  border: none;
+  padding: 1em;
+  border-radius: 5px;
+  color: white;
+  box-shadow: black 0px 2px; }
+
+input[class=keypad_operators] {
+  background-color: #7541c8;
+  color: black; }
+
+input[class=keypad_equals] {
+  background-color: #c2810a;
+  color: black; }
+
+input[class=keypad_del] {
+  background-color: #aa1717;
+  color: black; }
+
+.pressed {
+  background-color: #aa1717 !important;
+  color: black; }

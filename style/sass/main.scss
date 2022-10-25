@@ -1,0 +1,99 @@
+$Light-orange: rgb(185, 125, 12);
+$Light-grayish-blue: hsl(210, 46%, 95%);
+$Moderate-violet: hsl(263, 55%, 52%);
+$Very-dark-blackish-blue: hsl(218, 27%, 19%);
+$Very-dark-blackish-black: hsl(223, 56%, 11%);
+$White: hsl(0, 0%, 100%);
+
+@mixin screen-size($size){
+    @if $size == phone-only {
+        @media screen and (max-width: 575px){@content;}
+    }
+    @else if $size == tablet-only {
+        @media screen and (min-width: 575px) and (max-width: 796px){@content;}
+    }
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: $Light-orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+main{
+    width: fit-content;
+    background-color: $Very-dark-blackish-blue;
+    padding: 1.5em;
+    border-radius: 10px;
+    @include screen-size(phone-only){
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.screen{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: $Light-grayish-blue;
+    margin-bottom: 1em;
+    height: 3em;
+    padding: 0.3em;
+}
+
+.keypad{
+    display: grid;
+    gap: 0.8em;
+    grid-template-columns: repeat(4, 1fr);
+    &_1{
+        grid-column: 1 / span 2;
+    }
+    &_equals{
+        grid-column: 3 / span 2;
+    }
+}
+
+input[type=button]{
+    background-color: $Very-dark-blackish-black;
+    outline: none;
+    border: none;
+    padding: 1em;
+    border-radius: 5px;
+    color: $White;
+    box-shadow: rgba(0, 0, 0, 1) 0px 2px;
+}
+
+input[class=keypad_operators]{
+    background-color: $Moderate-violet;
+    color: black;
+}
+
+input[class=keypad_equals]{
+    background-color: rgb(194, 129, 10);
+    color: black;
+}
+
+input[class=keypad_del]{
+    background-color: rgb(170, 23, 23);
+    color: black;
+}
+
+// input:focus{
+//     background-color: red;
+// }
+
+.pressed{
+    background-color: rgb(170, 23, 23) !important;
+    color: black;
+}
