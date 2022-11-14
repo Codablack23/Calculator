@@ -2,10 +2,10 @@ const calculator = document.querySelector('.calculator');
 const screen = document.querySelector('#display_screen');
 const key = calculator.querySelector('.keypad');
 const keyEquals = calculator.querySelector('.keypad_equals');
+let resCount = 0;
 
 
-key.addEventListener('click', e => 
-{
+key.addEventListener('click', e => {
     if(e.target.matches('input'))
     {
         const operation = e.target.dataset.operation;
@@ -17,9 +17,18 @@ key.addEventListener('click', e =>
                displayedNumber === '*' || displayedNumber === '/' ||
                displayedNumber === '+')
             {
+
+
                 screen.textContent = content; 
+                resCount = 0;
+                
             } else {
-                screen.textContent = displayedNumber + content;
+                if(resCount !== 0){
+                  resCount = 0;
+                  screen.textContent = content;
+                }else{
+                    screen.textContent = displayedNumber + content;
+                }
                 keyEquals.removeAttribute("disabled");
             }
         }
@@ -29,8 +38,14 @@ key.addEventListener('click', e =>
                 screen.textContent = e.target.value;
                 calculator.dataset.operations = operation;
             }
-            calculator.dataset.firstValue = displayedNumber;
-            keyEquals.removeAttribute("disabled");
+            if(!(
+              displayedNumber === '-' || 
+              displayedNumber === '*' || displayedNumber === '/' ||
+              displayedNumber === '+'
+              )){
+              calculator.dataset.firstValue = displayedNumber;
+              keyEquals.removeAttribute("disabled");
+            }
         }
         if(operation === 'clear'){
             location.reload();
@@ -65,12 +80,15 @@ key.addEventListener('click', e =>
                 } else if(operator === 'divide'){
                     data = parseFloat(firstValue) / parseFloat(secondValue);
                 }
+                
                 return data;
+
             }
             if(!operator){
                 screen.textContent = displayedNumber;
             } else {
                 screen.textContent = result(firstValue, operator, secondValue);
+                resCount++
                 keyEquals.setAttribute("disabled", "");
             }
 
